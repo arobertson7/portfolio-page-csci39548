@@ -138,7 +138,71 @@
         <h3>Contact Me</h3>
         <div id="contact-content">
           <form action="#" method="POST">
-            
+            <fieldset>
+              <legend>Your information</legend>
+
+              <p>
+                <label for="name">Your name:</label><br>
+                <input type="text" name="name" placeholder="First Last">
+              </p>
+
+              <p>
+                <label for="email">Email:</label><br>
+                <input type="email" name="email" placeholder="you@email.com">
+              </p>
+
+              <p>
+                <label for="phone">Phone Number</label><br>
+                <input type="tel" name="phone" placeholder="646-555-5555">
+              </p>
+
+              <p>
+                <label for="social">Linkedin or Website</label><br>
+                <input type="url" name="social" placeholder="https://link.com">
+              </p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Common Interests</legend>
+
+              <p>Which Computer Science topics are you also interested in?</p>
+              <p>
+                <label><input type="checkbox" name="cs-interests" value="data structures & algorithms">Data Structures & Algorithms</label><br>
+                <label><input type="checkbox" name="cs-interests" value="computer networking">Computer Networking</label><br>
+                <label><input type="checkbox" name="cs-interests" value="computer architecture / cpu design">Computer Architecture / CPU Design</label><br>
+                <label><input type="checkbox" name="cs-interests" value="databases">Databases</label><br>
+                <label><input type="checkbox" name="cs-interests" value="ios development">iOS Development</label><br>
+                <label><input type="checkbox" name="cs-interests" value="cloud computing">Cloud Computing</label><br>
+              </p>
+
+              <p>What's your favorite programming language?</p>
+              <p>
+                <label><input type="radio" name="programming-language" value="c++">C++</label><br>
+                <label><input type="radio" name="programming-language" value="java">Java</label><br>
+                <label><input type="radio" name="programming-language" value="javascript">JavaScript</label><br>
+                <label><input type="radio" name="programming-language" value="swift">Swift</label><br>
+                <label><input type="radio" name="programming-language" value="python">Python</label><br>
+              </p>
+
+              <p>Which hobbies do we have in common?</p>
+              <p>
+                <label><input type="checkbox" name="common-hobbies" value="traveling">Traveling</label><br>
+                <label><input type="checkbox" name="common-hobbies" value="skateboarding">Skateboarding</label><br>
+                <label><input type="checkbox" name="common-hobbies" value="playing pool">Playing Pool</label><br>
+                <label><input type="checkbox" name="common-hobbies" value="concerts">Concerts</label><br>
+                <label><input type="checkbox" name="common-hobbies" value="tennis">Tennis</label><br>
+                <label><input type="checkbox" name="common-hobbies" value="playing music">Playing Music</label><br>
+                <label><input type="checkbox" name="common-hobbies" value="learning foreign languages">Learning Foreign Languages</label><br>
+              </p>
+            </fieldset>
+
+            <fieldset>
+              <legend>Submit</legend>
+              <p>
+                <button type="submit">Submit</button>
+              </p>
+            </fieldset>
+
           </form>
         </div>
       </section>
