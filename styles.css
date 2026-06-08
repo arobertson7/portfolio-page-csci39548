@@ -1,6 +1,728 @@
-img {
-  width: 300px;
-  height: 300px;
+/* ==========================================================================
+   1. Design Tokens & Root Variables (Light Blue Theme)
+   ========================================================================== */
+:root {
+  --bg-dark: #f0f6fc;
+  --bg-gradient: radial-gradient(circle at top, #e0f2fe 0%, #f0f6fc 60%, #e2e8f0 100%);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --card-bg-hover: rgba(255, 255, 255, 0.92);
+  --border-color: rgba(15, 23, 42, 0.08);
+  --border-hover: rgba(14, 165, 233, 0.4);
+
+  --accent-color: #0284c7;
+  --accent-light: #0ea5e9;
+  --accent-pink: #db2777;
+  --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #0284c7 0%, #1d4ed8 100%);
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 16px 40px rgba(15, 23, 42, 0.12);
+  --shadow-glow: 0 0 25px rgba(14, 165, 233, 0.25);
+  --shadow-glow-pink: 0 0 20px rgba(219, 39, 119, 0.2);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Element Specific Color Mappings */
+  --nav-bg: rgba(255, 255, 255, 0.7);
+  --nav-hover-bg: rgba(14, 165, 233, 0.1);
+  --nav-hover-shadow: 0 0 15px rgba(14, 165, 233, 0.15);
+  --img-border: rgba(15, 23, 42, 0.06);
+  --input-bg: rgba(255, 255, 255, 0.85);
+  --input-focus-bg: #ffffff;
+  --btn-shadow: rgba(14, 165, 233, 0.25);
+  --btn-shadow-hover: rgba(14, 165, 233, 0.35);
+}
+
+/* ==========================================================================
+   2. Reset & Base Setup
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-dark);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.7;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 24px 80px 24px;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.1);
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-light);
+}
+
+/* ==========================================================================
+   3. Header & Navigation
+   ========================================================================== */
+header {
+  text-align: center;
+  padding: 60px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+header h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 2px 8px rgba(14, 165, 233, 0.15));
+}
+
+header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+nav {
+  display: inline-flex;
+  gap: 4px;
+  background: var(--nav-bg);
+  padding: 6px;
+  border-radius: 100px;
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-sm);
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 10px 20px;
+  border-radius: 100px;
+  transition: all var(--transition-fast);
+}
+
+nav a:hover {
+  color: var(--accent-color);
+  background: var(--nav-hover-bg);
+  box-shadow: var(--nav-hover-shadow);
+}
+
+/* ==========================================================================
+   4. Main Content Layout
+   ========================================================================== */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+
+section {
+  scroll-margin-top: 40px;
+}
+
+section h3 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+section h3::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 4px;
+  width: 40px;
+  border-radius: 2px;
+  background: var(--accent-gradient);
+  transition: width var(--transition-normal);
+}
+
+section:hover h3::after {
+  width: 75px;
+}
+
+hr {
+  display: none;
+  /* Hide default hr borders since we design card dividers natively */
+}
+
+/* ==========================================================================
+   5. About Section
+   ========================================================================== */
+#about-content {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform var(--transition-normal), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+#about-content:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+#about-content img {
+  width: 260px;
+  height: 260px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: var(--radius-md);
+  border: 3px solid var(--img-border);
+  box-shadow: var(--shadow-md);
+  transition: transform var(--transition-normal), border-color var(--transition-normal);
+}
+
+#about-content:hover img {
+  transform: scale(1.03) rotate(-1deg);
+  border-color: var(--accent-color);
+}
+
+#about-content p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  flex: 1;
+}
+
+#about-content p br {
+  margin-bottom: 16px;
+  content: "";
+  display: block;
+}
+
+/* ==========================================================================
+   6. Academics Section
+   ========================================================================== */
+#academics-content {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+#academics-content:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+#academics-content>p {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+
+#academics-content h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-top: 32px;
+  margin-bottom: 18px;
+}
+
+/* Ordered list (Favorite courses): Style as custom grid of cards */
+#academics-content ol {
+  list-style: none;
+  counter-reset: course-counter;
+  padding-left: 0;
+  margin-left: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+#academics-content ol li {
+  counter-increment: course-counter;
+  position: relative;
+  padding: 14px 16px 14px 50px;
+  background: rgba(15, 23, 42, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+#academics-content ol li:hover {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+
+#academics-content ol li::before {
+  content: counter(course-counter);
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  background: var(--accent-gradient);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);
+}
+
+/* Unordered list (Current Learning): Modernized styled bullets */
+#academics-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+#academics-content>ul>li {
+  position: relative;
+  padding-left: 28px;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+#academics-content>ul>li::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-pink);
+  box-shadow: var(--shadow-glow-pink);
+}
+
+#academics-content ul li em {
+  font-style: normal;
+  color: var(--text-primary);
+  font-weight: 600;
+  background: rgba(15, 23, 42, 0.04);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+/* Nested list styling */
+#academics-content ul ul {
+  margin-top: 10px;
+  margin-bottom: 12px;
+  margin-left: 18px;
+  border-left: 2px solid rgba(219, 39, 119, 0.2);
+  padding-left: 16px;
+}
+
+#academics-content ul ul li {
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 8px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+#academics-content ul ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 2px;
+  background: rgba(219, 39, 119, 0.4);
+}
+
+/* ==========================================================================
+   7. Hobbies Section
+   ========================================================================== */
+#hobbies-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+#hobbies-content>p {
+  grid-column: 1 / -1;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.hobby-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hobby-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.hobby-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.hobby-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--img-border);
+  transition: transform var(--transition-normal);
+}
+
+.hobby-card:hover img {
+  transform: scale(1.04);
+}
+
+.hobby-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   8. Contact Form
+   ========================================================================== */
+#contact-content {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+#contact-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+fieldset {
+  border: 1px solid var(--border-color);
+  padding: 28px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+legend {
+  color: var(--accent-color);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+fieldset p {
+  margin: 0;
+}
+
+/* Style direct input labels */
+fieldset p>label[for] {
+  display: inline-block;
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+/* Text Inputs (name, email, tel, url) */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"] {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+  outline: none;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+  background: var(--input-focus-bg);
+}
+
+/* Style form questions/instructions inside fieldsets */
+fieldset p:first-of-type:not(:has(label[for])) {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+/* Checkbox & Radio Labels container formatting */
+fieldset label:not([for]) {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: color var(--transition-fast);
+}
+
+fieldset label:not([for]):hover {
+  color: var(--text-primary);
+}
+
+fieldset label:not([for]):has(input:checked) {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+/* Custom Checkbox & Radio appearance */
+input[type="checkbox"],
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--text-muted);
+  background: var(--input-bg);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+input[type="checkbox"] {
+  border-radius: 4px;
+}
+
+input[type="radio"] {
+  border-radius: 50%;
+}
+
+input[type="checkbox"]:hover,
+input[type="radio"]:hover {
+  border-color: var(--accent-light);
+}
+
+input[type="checkbox"]:checked {
+  background: var(--accent-gradient);
+  border-color: transparent;
+}
+
+input[type="radio"]:checked {
+  border-color: var(--accent-light);
+}
+
+/* Draw checkmark inside checkbox */
+input[type="checkbox"]:checked::after {
+  content: "";
+  width: 5px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  position: absolute;
+  top: 1px;
+}
+
+/* Draw dot inside radio */
+input[type="radio"]:checked::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  box-shadow: var(--shadow-glow);
+  position: absolute;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background: var(--accent-gradient);
+  color: white;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.025em;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--btn-shadow);
+  transition: all var(--transition-normal);
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+button[type="submit"]:hover {
+  background: var(--accent-gradient-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--btn-shadow-hover), var(--shadow-glow);
+}
+
+button[type="submit"]:active {
+  transform: translateY(1px);
+}
+
+/* ==========================================================================
+   9. Footer
+   ========================================================================== */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--border-color);
+  margin-top: 80px;
+}
+
+footer p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   10. Responsiveness
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    padding: 20px 16px 60px 16px;
+  }
+
+  header {
+    padding: 30px 10px;
+  }
+
+  header h1 {
+    font-size: 2.6rem;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+  }
+
+  nav a {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  main {
+    gap: 60px;
+  }
+
+  #about-content {
+    flex-direction: column;
+    padding: 32px 24px;
+    text-align: center;
+    gap: 32px;
+  }
+
+  #about-content img {
+    width: 200px;
+    height: 200px;
+  }
+
+  #academics-content,
+  #contact-content {
+    padding: 32px 24px;
+  }
+
+  #academics-content ol {
+    grid-template-columns: 1fr;
+  }
 }
