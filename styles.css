@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. Design Tokens & Root Variables (Light Blue Theme)
+    Root Variables (Light Blue Theme)
    ========================================================================== */
 :root {
   --bg-dark: #f0f6fc;
@@ -46,7 +46,7 @@
 }
 
 /* ==========================================================================
-   2. Reset & Base Setup
+    Reset & Base Setup
    ========================================================================== */
 * {
   margin: 0;
@@ -55,7 +55,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* makes jumping to page sections from links smoother */
 }
 
 body {
@@ -93,7 +93,7 @@ body {
 }
 
 /* ==========================================================================
-   3. Header & Navigation
+    Header & Navigation
    ========================================================================== */
 header {
   text-align: center;
@@ -153,7 +153,7 @@ nav a:hover {
 }
 
 /* ==========================================================================
-   4. Main Content Layout
+    Main Content Layout
    ========================================================================== */
 main {
   display: flex;
@@ -190,13 +190,8 @@ section:hover h3::after {
   width: 75px;
 }
 
-hr {
-  display: none;
-  /* Hide default hr borders since we design card dividers natively */
-}
-
 /* ==========================================================================
-   5. About Section
+    About Section
    ========================================================================== */
 #about-content {
   display: flex;
@@ -247,7 +242,7 @@ hr {
 }
 
 /* ==========================================================================
-   6. Academics Section
+    Academics Section
    ========================================================================== */
 #academics-content {
   background: var(--card-bg);
@@ -394,7 +389,7 @@ hr {
 }
 
 /* ==========================================================================
-   7. Hobbies Section
+    Hobbies Section
    ========================================================================== */
 #hobbies-content {
   display: grid;
@@ -457,7 +452,7 @@ hr {
 }
 
 /* ==========================================================================
-   8. Contact Form
+    Contact Form
    ========================================================================== */
 #contact-content {
   background: var(--card-bg);
@@ -536,7 +531,7 @@ input[type="url"]:focus {
 }
 
 /* Style form questions/instructions inside fieldsets */
-fieldset p:first-of-type:not(:has(label[for])) {
+fieldset p:not(:has(label[for])) {
   color: var(--text-primary);
   font-weight: 600;
   font-size: 1rem;
@@ -658,7 +653,7 @@ button[type="submit"]:active {
 }
 
 /* ==========================================================================
-   9. Footer
+    Footer
    ========================================================================== */
 footer {
   text-align: center;
@@ -674,7 +669,7 @@ footer p {
 }
 
 /* ==========================================================================
-   10. Responsiveness
+    Responsiveness
    ========================================================================== */
 @media (max-width: 768px) {
   body {
